@@ -135,6 +135,11 @@ public class GasBooster : MonoBehaviour
 
         rb.AddForce(burstDir * burstImpulse, ForceMode2D.Impulse);
 
+        // ═══ NOVO: Screen shake via ODMGearSystem ═══
+        var odmSystem = GetComponent<ODMGearSystem>();
+        if (odmSystem != null)
+            odmSystem.OnGasBurst();
+
         if (gasBurstSound != null)
             AudioSource.PlayClipAtPoint(gasBurstSound, transform.position);
 
