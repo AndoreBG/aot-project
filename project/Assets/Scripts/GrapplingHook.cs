@@ -220,9 +220,14 @@ public class GrapplingHook : MonoBehaviour
         if (currentState == HookState.Idle || currentState == HookState.Retracting)
             return;
 
+        bool wasAttached = currentState == HookState.Attached;
+
         currentState = HookState.Retracting;
         player.isHooked = false;
         isReelingIn = false;
+
+        if (wasAttached)
+            player.PreserveHookMomentumUntilGrounded();
 
         // Preservar velocidade ao soltar (momentum de lançamento)
         PlaySound(retractSound);

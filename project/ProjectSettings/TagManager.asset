@@ -12,8 +12,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Grabable
+  - Obstacle
   - 
   - 
   - 
@@ -41,6 +41,30 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2806998271
+    locked: 0
+  - name: BackFurniture
+    uniqueID: 2533345993
+    locked: 0
+  - name: BackFX
+    uniqueID: 2126331821
+    locked: 0
+  - name: Player
+    uniqueID: 546005801
+    locked: 0
+  - name: FrontFX
+    uniqueID: 3505268425
+    locked: 0
+  - name: Ground
+    uniqueID: 1719374787
+    locked: 0
+  - name: FrontFurniture
+    uniqueID: 2468642827
+    locked: 0
+  - name: Frontground
+    uniqueID: 1065582329
     locked: 0
   m_RenderingLayers:
   - Default

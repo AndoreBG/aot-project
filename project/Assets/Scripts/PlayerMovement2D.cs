@@ -13,6 +13,7 @@ public class PlayerMovement2D : MonoBehaviour
     public float airAcceleration = 20f;
     public float airDeceleration = 5f;
     public float airMoveSpeed = 6f;
+    public bool preserveHookMomentumOnRelease = true;
 
     [Header("Jump")]
     public float jumpForce = 12f;
@@ -44,6 +45,7 @@ public class PlayerMovement2D : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
     private bool isJumping;
+    private bool preservingHookMomentum;
 
     private void Awake()
     {
@@ -77,9 +79,14 @@ public class PlayerMovement2D : MonoBehaviour
 
         // ═══ Coyote time ═══
         if (isGrounded)
+        {
             coyoteTimeCounter = coyoteTime;
+            preservingHookMomentum = false;
+        }
         else
+        {
             coyoteTimeCounter -= Time.deltaTime;
+        }
 
         // ═══ Jump com W ═══
         if (Input.GetKeyDown(KeyCode.W))
@@ -133,6 +140,15 @@ public class PlayerMovement2D : MonoBehaviour
             rb.gravityScale = normalGravityScale;
 
         // Movimento horizontal
+        if (preservingHookMomentum && !isGrounded)
+        {
+            ClampFallSpeed();
+            return;
+        }
+
+        // Ao tocar no chao, volta a usar movimento normal e desaceleracao terrestre.
+        preservingHookMomentum = false;
+
         float targetSpeed = horizontalInput * (isGrounded ? moveSpeed : airMoveSpeed);
         float accel;
 
@@ -146,6 +162,19 @@ public class PlayerMovement2D : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x + movement, rb.linearVelocity.y);
 
         // Clamp queda
+        ClampFallSpeed();
+    }
+
+    public void PreserveHookMomentumUntilGrounded()
+    {
+        if (!preserveHookMomentumOnRelease || isGrounded)
+            return;
+
+        preservingHookMomentum = true;
+    }
+
+    private void ClampFallSpeed()
+    {
         if (rb.linearVelocity.y < -maxFallSpeed)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -maxFallSpeed);
     }
