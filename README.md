@@ -137,7 +137,7 @@ A escassez não é um sistema paralelo — ela **É** a experiência. Cada recur
 **Aplicação do Metroidvania:**
 Um mundo único, contíguo. A torre é uma mega-estrutura vertical. A estrutura concêntrica das três muralhas é "achatada" num corte vertical:
 
-| Zona | Tema AoT | Tons Dominantes | Atmosfera Sombria |
+| Zona(s) | Tema AoT | Tons Dominantes | Atmosfera Sombria |
 |---|---|---|---|
 | Zona 0 | Esgotos / Subterrâneo | Vermelho escuro / Carmesim | Túneis de tijolos/pedregulhos ensanguentados. Água turva vermelha. Sons de algo espreitando, mas é incerto do que pode ser |
 | Zona 1 | Base da torre / Salas de solados | Marrom Sangue / Carne Escura | A base da torre está em ruínas. Manchas de sangue velho nas paredes. Fogueiras apagadas. Cadaveres de soldados com equipamentos saqueável |
@@ -163,7 +163,7 @@ Obstáculos que só são superados com habilidades específicas. Controlam o flu
 | Paredes sem apoio | **Ganchos ODM** (grapple) | Equipamento de manobra vertical | Cada uso do gancho consome gás |
 | Abismos entre muralhas | **Propulsão a Gás** (dash aéreo) | Cilindros de gás | Dash consome 3x mais gás que gancho |
 | Blocos de cristal/endurecimento/portões de aço | **Estocada da Armaguarda** | Lâminas | Gasta 1 lâmina por uso; feridas no braço se utilizado 2x seguidas |
-| Zonas de vapor denso | **Máscara de Gás** (item permanente) | Exploração de território Abismo de Ymir | Estar no vapor sem máscara drena HP |
+| Zonas de vapor denso | **Máscara de Gás** (item permanente) | Exploração do Caminho de Ymir | Estar no vapor sem máscara drena HP |
 
 ### 4.3 BACKTRACKING (REVISITAÇÃO DE ÁREAS)
 
@@ -200,9 +200,9 @@ Chefes que guardam habilidades ou passagens críticas. Testam habilidades recém
 Cada boss é um **evento traumático**. Vencer não traz alegria — traz alívio e custo.
 
 | Boss | Zona | Poder Concedido | Mecânica de Luta |
-|---|---|---|---|---|
+|---|---|---|---|
 | **Titã Blindado** | 0→1 | Estocada da Armaguarda | Encontrar brechas na armadura usando gás para flanquear. Ataques frontais são inúteis. 
-| **Titã Bestial** | 1→2 | Arremesso (ranged attack) | Ele fica de olho nessa passagem e arremessa escombros. O jogador precisa subir sob fogo cruzado. 
+| **Titã Bestial** | 1→2 | Arremesso (ranged attack) | Ele fica de olho nas janelas e arremessa escombros qunado o jogador por uma janela. O jogador precisa subir sob fogo cruzado. 
 | **Titã Colossal** | 2 ("exterior") | Gas Boost (dash) | Escalar o corpo enquanto vapor drena HP. Ele se move devagar mas cada passo é um grande ataque |
 | **Titã Fundador** | 3 | Coordenada (final) | Multi-fase dentro do Caminho. A realidade se distorce. As fases replicam zonas anteriores, mas corrompidas. A luta final não tem trilha sonora. Só silêncio e os sons do jogador. É a coisa mais aterrorizante do jogo. |
 
