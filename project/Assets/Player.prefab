@@ -302,6 +302,9 @@ GameObject:
   - component: {fileID: 1898845933692970042}
   - component: {fileID: 1733680781650658660}
   - component: {fileID: 168650499162622456}
+  - component: {fileID: 7409014234658912661}
+  - component: {fileID: 7409014234658912662}
+  - component: {fileID: 7409014234658912663}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -415,6 +418,8 @@ MonoBehaviour:
   coyoteTime: 0.1
   jumpBufferTime: 0.15
   jumpCutMultiplier: 0.4
+  movementSpeedMultiplier: 1
+  jumpForceMultiplier: 1
   groundCheckPoint: {fileID: 3925988412658656069}
   groundCheckSize: {x: 0.64, y: 0.05}
   groundLayer:
@@ -541,6 +546,88 @@ MonoBehaviour:
   speedShakeIntensity: 0.3
   speedShakeThreshold: 18
   showDebug: 0
+--- !u!114 &7409014234658912661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026096873268893965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5e22d4e86f4af4a9f8b8c17d6eaa10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 100
+  currentHealth: 50
+  clampStartHealthToMax: 1
+  invulnerabilityDuration: 0.6
+  knockbackImpulse: 12
+  upwardKnockbackBonus: 0.25
+  controlLockDuration: 0.18
+  woundedMoveSpeedMultiplier: 0.6
+  woundedJumpForceMultiplier: 0.55
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  onLegWounded:
+    m_PersistentCalls:
+      m_Calls: []
+  onLegWoundCleared:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7409014234658912662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026096873268893965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f10f74121e48af8dce8bb4175978c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFallDamage2D
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  minimumAirTime: 0.15
+  mediumFallSpeed: 12
+  mediumFallDamage: 15
+  highFallSpeed: 18
+  highFallDamage: 30
+  highFallWoundsLegs: 1
+  applyFallKnockback: 0
+--- !u!114 &7409014234658912663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026096873268893965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b74d8c53be4e1599442db859e98263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthBar
+  playerHealth: {fileID: 7409014234658912661}
+  fillImage: {fileID: 0}
+  slider: {fileID: 0}
+  findPlayerOnStart: 1
+  createCanvasIfMissing: 1
+  anchoredPosition: {x: 24, y: -24}
+  size: {x: 260, y: 22}
+  backgroundColor: {r: 0.08, g: 0.08, b: 0.08, a: 0.8}
+  fillColor: {r: 0.76, g: 0.08, b: 0.08, a: 1}
 --- !u!1 &6617352173470670846
 GameObject:
   m_ObjectHideFlags: 0

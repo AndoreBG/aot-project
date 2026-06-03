@@ -21,6 +21,10 @@ public class PlayerMovement2D : MonoBehaviour
     public float jumpBufferTime = 0.15f;
     public float jumpCutMultiplier = 0.4f;
 
+    [Header("Status Modifiers")]
+    [Range(0.1f, 1f)] public float movementSpeedMultiplier = 1f;
+    [Range(0.1f, 1f)] public float jumpForceMultiplier = 1f;
+
     [Header("Ground Check")]
     public Transform groundCheckPoint;
     public Vector2 groundCheckSize = new Vector2(0.4f, 0.05f);
@@ -46,6 +50,7 @@ public class PlayerMovement2D : MonoBehaviour
     private float jumpBufferCounter;
     private bool isJumping;
     private bool preservingHookMomentum;
+    private float controlLockTimer;
 
     private void Awake()
     {
@@ -58,6 +63,9 @@ public class PlayerMovement2D : MonoBehaviour
 
     private void Update()
     {
+        if (controlLockTimer > 0f)
+            controlLockTimer -= Time.deltaTime;
+
         // ═══ Input ═══
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
@@ -95,9 +103,9 @@ public class PlayerMovement2D : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
 
         // Jump — só quando NÃO está no gancho
-        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && !isJumping && !isHooked)
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && !isJumping && !isHooked && controlLockTimer <= 0f)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * jumpForceMultiplier);
             jumpBufferCounter = 0f;
             coyoteTimeCounter = 0f;
             isJumping = true;
@@ -139,6 +147,12 @@ public class PlayerMovement2D : MonoBehaviour
         else
             rb.gravityScale = normalGravityScale;
 
+        if (controlLockTimer > 0f)
+        {
+            ClampFallSpeed();
+            return;
+        }
+
         // Movimento horizontal
         if (preservingHookMomentum && !isGrounded)
         {
@@ -149,7 +163,7 @@ public class PlayerMovement2D : MonoBehaviour
         // Ao tocar no chao, volta a usar movimento normal e desaceleracao terrestre.
         preservingHookMomentum = false;
 
-        float targetSpeed = horizontalInput * (isGrounded ? moveSpeed : airMoveSpeed);
+        float targetSpeed = horizontalInput * (isGrounded ? moveSpeed : airMoveSpeed) * movementSpeedMultiplier;
         float accel;
 
         if (isGrounded)
@@ -171,6 +185,18 @@ public class PlayerMovement2D : MonoBehaviour
             return;
 
         preservingHookMomentum = true;
+    }
+
+    public void SetStatusMultipliers(float speedMultiplier, float jumpMultiplier)
+    {
+        movementSpeedMultiplier = Mathf.Clamp(speedMultiplier, 0.1f, 1f);
+        jumpForceMultiplier = Mathf.Clamp(jumpMultiplier, 0.1f, 1f);
+    }
+
+    public void LockControl(float duration)
+    {
+        controlLockTimer = Mathf.Max(controlLockTimer, duration);
+        jumpBufferCounter = 0f;
     }
 
     private void ClampFallSpeed()

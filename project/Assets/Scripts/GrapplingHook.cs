@@ -274,6 +274,19 @@ public class GrapplingHook : MonoBehaviour
         return currentState != HookState.Idle;
     }
 
+    public void ForceDisconnect()
+    {
+        if (currentState == HookState.Idle)
+            return;
+
+        currentState = HookState.Idle;
+        player.isHooked = false;
+        isReelingIn = false;
+        hookTipPosition = GetAnchorCenter();
+        OnHookRetractStart?.Invoke();
+        OnHookRetracted?.Invoke();
+    }
+
     private void PlaySound(AudioClip clip)
     {
         if (clip != null && audioSource != null)
