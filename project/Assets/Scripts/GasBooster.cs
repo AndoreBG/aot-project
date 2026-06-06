@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class GasBooster : MonoBehaviour
 {
@@ -7,14 +8,14 @@ public class GasBooster : MonoBehaviour
     public float currentGas = 100f;
 
     [Header("Continuous Boost (Hold Space)")]
-    public float gasConsumptionRate = 15f;
+    public float gasConsumptionRate = 8f;
     public float hookedBoostForce = 35f;
     public float airBoostForce = 10f;
     public float groundBoostForce = 4f;
 
     [Header("Burst (Tap Space)")]
     public float burstImpulse = 10f;
-    public float burstCost = 8f;
+    public float burstCost = 4f;
     public float burstCooldown = 0.3f;
 
     [Header("Limits")]
@@ -35,6 +36,9 @@ public class GasBooster : MonoBehaviour
     private float burstTimer;
     private bool wasUsingGas;
 
+    public event Action<float, float> GasChanged;
+    public float GasPercent => maxGas <= 0f ? 0f : currentGas / maxGas;
+
     private void Awake()
     {
         player = GetComponent<PlayerMovement2D>();
@@ -49,6 +53,7 @@ public class GasBooster : MonoBehaviour
     private void Start()
     {
         currentGas = maxGas;
+        NotifyGasChanged();
 
         if (gasParticlesLeft == null)
             gasParticlesLeft = CreateGasParticles("GasLeft", new Vector3(-0.3f, -0.2f, 0));
@@ -86,8 +91,7 @@ public class GasBooster : MonoBehaviour
             return;
 
         // Consumir gás
-        currentGas -= gasConsumptionRate * Time.fixedDeltaTime;
-        currentGas = Mathf.Max(0f, currentGas);
+        SetCurrentGas(currentGas - gasConsumptionRate * Time.fixedDeltaTime);
         if (currentGas <= 0f) return;
 
         Vector2 boostDir;
@@ -123,7 +127,7 @@ public class GasBooster : MonoBehaviour
 
     private void DoBurst()
     {
-        currentGas -= burstCost;
+        SetCurrentGas(currentGas - burstCost);
         burstTimer = burstCooldown;
 
         Vector2 burstDir;
@@ -227,17 +231,32 @@ public class GasBooster : MonoBehaviour
     // ═══════════════════════════════════════════
     public void RefillGas(float amount)
     {
-        currentGas = Mathf.Min(currentGas + amount, maxGas);
+        SetCurrentGas(currentGas + amount);
     }
 
     public void RefillGasFull()
     {
-        currentGas = maxGas;
+        SetCurrentGas(maxGas);
     }
 
     public float GetGasPercentage()
     {
-        return currentGas / maxGas;
+        return GasPercent;
+    }
+
+    private void SetCurrentGas(float value)
+    {
+        float clampedGas = Mathf.Clamp(value, 0f, maxGas);
+        if (Mathf.Approximately(currentGas, clampedGas))
+            return;
+
+        currentGas = clampedGas;
+        NotifyGasChanged();
+    }
+
+    private void NotifyGasChanged()
+    {
+        GasChanged?.Invoke(currentGas, maxGas);
     }
 
     // ═══════════════════════════════════════════

@@ -2,12 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum PlayerDamageKind
-{
-    HitPoints,
-    LegWound
-}
-
 [Serializable]
 public class HealthChangedEvent : UnityEvent<float, float> { }
 
@@ -29,27 +23,18 @@ public class PlayerHealth : MonoBehaviour
     public float upwardKnockbackBonus = 0.25f;
     public float controlLockDuration = 0.18f;
 
-    [Header("Leg Wound")]
-    [Range(0.1f, 1f)] public float woundedMoveSpeedMultiplier = 0.6f;
-    [Range(0.1f, 1f)] public float woundedJumpForceMultiplier = 0.55f;
-
     [Header("Inspector Events")]
     public HealthChangedEvent onHealthChanged;
     public DamageTakenEvent onDamaged;
     public UnityEvent onHealed;
-    public UnityEvent onLegWounded;
-    public UnityEvent onLegWoundCleared;
     public UnityEvent onDeath;
 
     public event Action<float, float> HealthChanged;
     public event Action<float, Vector2> Damaged;
     public event Action Healed;
-    public event Action LegWounded;
-    public event Action LegWoundCleared;
     public event Action Died;
 
     public bool IsDead { get; private set; }
-    public bool HasLegWound { get; private set; }
     public bool CanTakeDamage => !IsDead && invulnerabilityTimer <= 0f;
     public float HealthPercent => maxHealth <= 0f ? 0f : currentHealth / maxHealth;
 
@@ -70,7 +55,6 @@ public class PlayerHealth : MonoBehaviour
         if (clampStartHealthToMax)
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-        ApplyLegWoundModifiers();
         NotifyHealthChanged();
 
         if (currentHealth <= 0f)
@@ -105,17 +89,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0f)
             Die();
-    }
-
-    public void ApplyLegWound()
-    {
-        if (IsDead || HasLegWound)
-            return;
-
-        HasLegWound = true;
-        ApplyLegWoundModifiers();
-        LegWounded?.Invoke();
-        onLegWounded?.Invoke();
     }
 
     public void Heal(float amount)
@@ -155,29 +128,15 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         currentHealth = maxHealth;
-        ClearLegWounds();
         Healed?.Invoke();
         onHealed?.Invoke();
         NotifyHealthChanged();
     }
 
-    public void ClearLegWounds()
-    {
-        if (!HasLegWound)
-            return;
-
-        HasLegWound = false;
-        ApplyLegWoundModifiers();
-        LegWoundCleared?.Invoke();
-        onLegWoundCleared?.Invoke();
-    }
-
-    public void SetHealthFromCheckpoint(float savedHealth, bool savedLegWound)
+    public void SetHealthFromCheckpoint(float savedHealth)
     {
         IsDead = false;
         currentHealth = Mathf.Clamp(savedHealth, 0f, maxHealth);
-        HasLegWound = savedLegWound;
-        ApplyLegWoundModifiers();
         NotifyHealthChanged();
 
         if (currentHealth <= 0f)
@@ -202,17 +161,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (movement != null)
             movement.LockControl(controlLockDuration);
-    }
-
-    private void ApplyLegWoundModifiers()
-    {
-        if (movement == null)
-            return;
-
-        if (HasLegWound)
-            movement.SetStatusMultipliers(woundedMoveSpeedMultiplier, woundedJumpForceMultiplier);
-        else
-            movement.SetStatusMultipliers(1f, 1f);
     }
 
     private void NotifyHealthChanged()

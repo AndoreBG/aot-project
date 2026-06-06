@@ -16,14 +16,19 @@ public class PlayerHealthBar : MonoBehaviour
     public Color backgroundColor = new Color(0.08f, 0.08f, 0.08f, 0.8f);
     public Color fillColor = new Color(0.76f, 0.08f, 0.08f, 1f);
 
-    private void Start()
+    private RectTransform fillRect;
+
+    private void Awake()
     {
         if (playerHealth == null)
             playerHealth = GetComponent<PlayerHealth>();
 
         if (playerHealth == null && findPlayerOnStart)
             playerHealth = FindFirstObjectByType<PlayerHealth>();
+    }
 
+    private void Start()
+    {
         if (playerHealth == null)
             return;
 
@@ -32,6 +37,12 @@ public class PlayerHealthBar : MonoBehaviour
 
         playerHealth.HealthChanged += UpdateBar;
         UpdateBar(playerHealth.currentHealth, playerHealth.maxHealth);
+    }
+
+    private void LateUpdate()
+    {
+        if (playerHealth != null)
+            UpdateBar(playerHealth.currentHealth, playerHealth.maxHealth);
     }
 
     private void OnDestroy()
@@ -47,6 +58,9 @@ public class PlayerHealthBar : MonoBehaviour
         if (fillImage != null)
             fillImage.fillAmount = percent;
 
+        if (fillRect != null)
+            fillRect.anchorMax = new Vector2(percent, 1f);
+
         if (slider != null)
         {
             slider.maxValue = maxHealth;
@@ -56,14 +70,10 @@ public class PlayerHealthBar : MonoBehaviour
 
     private void CreateRuntimeBar()
     {
-        GameObject canvasObject = new GameObject("Player Health Canvas");
-        Canvas canvas = canvasObject.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvasObject.AddComponent<CanvasScaler>();
-        canvasObject.AddComponent<GraphicRaycaster>();
+        Canvas canvas = PlayerHudCanvas.GetOrCreate();
 
         GameObject backgroundObject = new GameObject("Health Background");
-        backgroundObject.transform.SetParent(canvasObject.transform, false);
+        backgroundObject.transform.SetParent(canvas.transform, false);
         Image backgroundImage = backgroundObject.AddComponent<Image>();
         backgroundImage.color = backgroundColor;
 
@@ -82,7 +92,7 @@ public class PlayerHealthBar : MonoBehaviour
         fillImage.fillMethod = Image.FillMethod.Horizontal;
         fillImage.fillOrigin = 0;
 
-        RectTransform fillRect = fillObject.GetComponent<RectTransform>();
+        fillRect = fillObject.GetComponent<RectTransform>();
         fillRect.anchorMin = Vector2.zero;
         fillRect.anchorMax = Vector2.one;
         fillRect.offsetMin = new Vector2(3f, 3f);
