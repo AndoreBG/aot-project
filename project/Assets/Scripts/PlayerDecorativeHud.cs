@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerDecorativeHud : MonoBehaviour
@@ -8,6 +9,9 @@ public class PlayerDecorativeHud : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void CreateOnSceneLoad()
     {
+        if (SceneManager.GetActiveScene().name == "Menu" || FindFirstObjectByType<PlayerHealth>() == null)
+            return;
+
         Canvas canvas = PlayerHudCanvas.GetOrCreate();
         if (canvas.transform.Find(RootName) != null)
             return;
