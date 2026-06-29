@@ -1,6 +1,10 @@
-# 🩸 ATTACK ON TITAN: CRIMSON CORPUS 🩸
+# 🩸 Attack On Titan: CRIMSON CORPUS 🩸
 
-## PILARES DE DESIGN
+![Unity](https://img.shields.io/badge/Unity-2D-black?style=for-the-badge&logo=unity)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)
+![Gênero](https://img.shields.io/badge/Gêneros-Survival%202D%20ARPG%20TwinStick-red?style=for-the-badge)
+
+## Pilares de Design
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -19,7 +23,7 @@
 
 ---
 
-## 1. VISÃO GERAL
+## 1. Visão Geral
 
 | Item | Descrição |
 |------|-----------|
@@ -31,9 +35,9 @@
 | **Perspectiva** | 2D Side-Scrolling vertical |
 | **Orientação** | Torre/Muralhas |
 
----
+<br>
 
-## 2. DIREÇÃO DE ARTE — PALETA MONOCROMÁTICA VERMELHA
+## 2. Direção de Arte
 
 ### 2.1 Filosofia Visual
 
@@ -51,9 +55,9 @@ A ausência de outras cores comunica:
 - **Quanto mais fundo/baixo, mais escuro e saturado** — o sangue seca nas ruínas exteriores, o vermelho se torna quase negro. A morte é densa.
 - **Os Titãs são sempre mais saturados que o ambiente** — eles são a coisa mais "viva" (e mais horrível) do cenário. Seus corpos pulsam em carmesim.
 
----
+<br>
 
-## 3. SISTEMA DE ESCASSEZ 
+## 3. Sistema de Escassez 
 
 ### 3.1 Filosofia da Escassez
 
@@ -128,11 +132,11 @@ A escassez não é um sistema paralelo — ela **É** a experiência. Cada recur
   └──────────────────────────────────────────┘
 ```
 
----
+<br>
 
-## 4. CARACTERÍSTICAS METROIDVANIA × ATTACK ON TITAN
+## 4. Características Metroidvania × Attack On Titan
 
-### 4.1 MAPA INTERCONECTADO (MUNDO ÚNICO)
+### 4.1 Mapa Interconectado
 
 **Aplicação do Metroidvania:**
 Um mundo único, contíguo. A torre é uma mega-estrutura vertical. A estrutura concêntrica das três muralhas é "achatada" num corte vertical:
@@ -153,7 +157,7 @@ Um mundo único, contíguo. A torre é uma mega-estrutura vertical. A estrutura 
 
 **Relação com o Tom Sombrio:** Não há zonas "felizes" ou "seguras". Cada bioma é uma variação de horror — da desolação das ruínas à opressão doentia do luxo de Sina. O alívio nunca chega.
 
-### 4.2 BARREIRAS DE HABILIDADE (ABILITY GATING)
+### 4.2 Barreiras de Habilidade
 
 **Aplicação do Metroidvania:**
 Obstáculos que só são superados com habilidades específicas. Controlam o fluxo de progressão e dão propósito a cada power-up. As barreiras refletem a brutalidade do mundo. Não são "portas mágicas" — são obstáculos físicos, militares e biológicos:
@@ -165,7 +169,7 @@ Obstáculos que só são superados com habilidades específicas. Controlam o flu
 | Blocos de cristal/endurecimento/portões de aço | **Estocada da Armaguarda** | Lâminas | Gasta 1 lâmina por uso; feridas no braço se utilizado 2x seguidas |
 | Zonas de vapor denso | **Máscara de Gás** (item permanente) | Exploração do Caminho de Ymir | Estar no vapor sem máscara drena HP |
 
-### 4.3 BACKTRACKING (REVISITAÇÃO DE ÁREAS)
+### 4.3 Backtracking
 
 **Aplicação do Metroidvania:**
 O backtracking não é só mecânico — é **emocionalmente pesado**. Voltar a um lugar é reencontrar os mortos que você deixou para trás.
@@ -174,7 +178,7 @@ Por exemplo:
 - **Retorno a Zona 0:** Com Estocada da Armaguarda obtida na Zona 1, o jogador pode destruir areas cristalizadas ou portões que bloquavam a passagens.
 - **Retorno a Zona 3:** Com a máscara de gás obtida na Zona 2, o jogador pode acessar o Abismo de Ymir
 
-### 4.4 ATMOSFERA, NARRATIVA AMBIENTAL E TRILHA SONORA
+### 4.4 Atmosfera, Narrativa Ambiental e Trilha Sonora
 
 **Aplicaçãode Metroidvania:**
 Narrativa contada através do ambiente e level design. A atmosfera (visual + sonora) é fundamental para a imersão. 
@@ -182,7 +186,6 @@ Narrativa contada através do ambiente e level design. A atmosfera (visual + son
 - Corpos de soldados em posições que contam histórias: abraçados, fugindo, lutando, rendidos.
 - Marcas de lâminas ODM nas paredes = rotas de fuga. Quanto mais marcas, mais desespero houve ali.
 - Escritos nas paredes em Sangue Fresco: mensagens de soldados enlouquecidos.
-
 
 **Trilha sonora — O silêncio é a norma, o som é o horror:**
 - 80% da exploração é em **silêncio** — apenas sons ambientes: vento, ranger de metal, gotas, ecos distantes.
@@ -192,7 +195,7 @@ Narrativa contada através do ambiente e level design. A atmosfera (visual + son
 
 **Relação com a Paleta:** O som e a cor trabalham juntos — zonas mais escuras são mais silenciosas. Zonas mais claras têm um zumbido constante, quase orgânico, como se as paredes respirassem.
 
-### 4.5 BOSSES E MINI-BOSSES
+### 4.5 Bosses e Mini-Bosses
 
 **Aplicação de Metroidvania:**
 Chefes que guardam habilidades ou passagens críticas. Testam habilidades recém-adquiridas e oferecem desafios memoráveis. Cada boss concede um novo poder.
@@ -212,7 +215,7 @@ Cada boss é um **evento traumático**. Vencer não traz alegria — traz alívi
 - Não concedem poder. Drop é aleatório.
 - Existem para lembrar que o mundo é injusto.
 
-### 4.6 SISTEMA DE MAPA E ORIENTAÇÃO
+### 4.6 Sistema de Mapa e Orientação
 
 **Aplicação de Metroidvania:**
 Mapa que se revela com a exploração:
@@ -223,7 +226,7 @@ Mapa que se revela com a exploração:
 
 **Relação com a Escassez:** O próprio mapa é escasso. Informação é recurso. O jogador que desperdiça sinalizadores fica sem marcadores. O jogador que não encontra anotações de scouts navega às cegas.
 
-### 4.7 SAVE POINTS / PONTOS DE DESCANSO
+### 4.7 Save Points / Pontos de Descanso
 
 **Aplicação de Metroidvania:**
 **Fogueiras dos Scouts** são pontos de save e recuperação espalhados pelo mapa. Âncoras seguras na exploração.
@@ -241,7 +244,7 @@ Mapa que se revela com a exploração:
 **Frequência:** 2-3 fogueiras por zona. A Zona 3 tem **uma única fogueira** no início e nenhuma depois.
 **Visual:** A fogueira é a única fonte de luz "quente"
 
-### 4.8 FAST TRAVEL (VIAGEM RÁPIDA)
+### 4.8 Fast Travel
 
 **Aplicação de Metroidvania:**
 Sistema de viagem rápida entre pontos já visitados para reduzir tedium no backtracking. É feito por meio de elevadores e sistemas de esgoto.
