@@ -1,8 +1,8 @@
 # 🩸 Attack On Titan: CRIMSON CORPUS 🩸
 
 ![Unity](https://img.shields.io/badge/Unity-2D-black?style=for-the-badge&logo=unity)
-![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)
-![Gênero](https://img.shields.io/badge/Gêneros-Survival%202D%20ARPG%20TwinStick-red?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Finalizado-green?style=for-the-badge)
+![Gênero](https://img.shields.io/badge/Gêneros-Metroidvania%20|%20Survival%20|%20Psychological%20Horror-red?style=for-the-badge)
 
 ## Pilares de Design
 
